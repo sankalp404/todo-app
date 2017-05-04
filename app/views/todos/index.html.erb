@@ -1,0 +1,20 @@
+<h1>Things to do:</h1>
+<button>
+  <%=  link_to 'Create a new todo',  new_todo_path %>
+</button>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  <% @todos.each do |todo| %>
+    <tr>
+      <td><%= todo.name %></td>
+      <td><%= todo.description %></td>
+      <td><%= link_to 'Edit ', edit_todo_path(todo) %></td>
+      <td><%= link_to 'Show', todo_path(todo) %></td>
+      <td><%= button_to 'Destroy', todo_path(todo),
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

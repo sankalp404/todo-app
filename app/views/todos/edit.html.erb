@@ -1,5 +1,9 @@
 <h2>Edit an existing todo</h2>
 
+<p>
+  <%= link_to 'back', todos_path %>
+</p>
+
 <% if @todo.errors.any? %>
     <div>
       <h2>
@@ -29,3 +33,4 @@
       <%= f.submit %>
     </p>
 <% end %>
+
