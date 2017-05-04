@@ -10,12 +10,13 @@
 # keep in mind that these are public methods; they must be placed
 # before declaring private visibility in the controller.
 class TodosController < ApplicationController
+  before_action :set_todo, only: [:show, :edit, :update, :destroy]
+
   def index
     @todos = Todo.all
   end
 
   def show
-    @todo = Todo.find(params[:id])
   end
 
   def new
@@ -23,8 +24,6 @@ class TodosController < ApplicationController
   end
 
   def edit
-    @todo = Todo.find(params[:id])
-
   end
 
   def create
@@ -38,7 +37,6 @@ class TodosController < ApplicationController
   end
 
   def update
-    @todo = Todo.find(params[:id])
     if @todo.update(todo_params)
       flash[:notice] = 'Todo was updated successfully'
       redirect_to todo_path(@todo)
@@ -48,13 +46,16 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    @todo = Todo.find(params[:id])
     @todo.destroy
     flash[:notice] = 'Todo deleted'
     redirect_to todos_path
   end
 
   private
+
+  def set_todo
+    @todo = Todo.find(params[:id])
+  end
 
   def todo_params
     params.require(:todo).permit(:name, :description)
