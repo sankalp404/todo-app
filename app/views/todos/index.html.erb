@@ -1,11 +1,14 @@
-<h1>Things to do:</h1>
-<button>
-  <%=  link_to 'Create a new todo',  new_todo_path %>
-</button>
-<table>
+<span class="p-2">
+  <%=  link_to 'Create a new todo',  new_todo_path, class: 'btn btn-primary' %>
+</span>
+<br>
+<table class="table table-striped">
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   <% @todos.each do |todo| %>
     <tr>
@@ -13,8 +16,10 @@
       <td><%= todo.description %></td>
       <td><%= link_to 'Edit ', edit_todo_path(todo) %></td>
       <td><%= link_to 'Show', todo_path(todo) %></td>
-      <td><%= button_to 'Destroy', todo_path(todo),
-                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td>
+        <%= button_to 'Destroy', todo_path(todo),
+                    method: :delete, data: { confirm: 'Are you sure?' },
+                      class: 'btn btn-danger' %></td>
     </tr>
   <% end %>
 </table>
